@@ -28,8 +28,8 @@ class MainScreenContentView: UIView {
 
     private lazy var oneCollectionView: UICollectionView = {
         let collectionViewOne = OneCollectionView()
-        let longClick = UILongPressGestureRecognizer(target: self, action: #selector(onLongClick))
-        collectionViewOne.addGestureRecognizer(longClick)
+//        let longClick = UILongPressGestureRecognizer(target: self, action: #selector(onLongClick))
+//        collectionViewOne.addGestureRecognizer(longClick)
         return collectionViewOne
     }()
 
@@ -79,25 +79,25 @@ extension MainScreenContentView {
         ])
     }
 
-    @objc func onLongClick(_ sender: UILongPressGestureRecognizer) {
-        let gestureLocation = sender.location(in: oneCollectionView)
-        switch sender.state {
-            case .began:
-                if let item = oneCollectionView.indexPathForItem(at: gestureLocation) {
-                    self.oneCollectionView.beginInteractiveMovementForItem(at: item)
-                } else {
-                    return
-                }
-            case .changed:
-                self.oneCollectionView.updateInteractiveMovementTargetPosition(gestureLocation)
-            case .ended:
-                self.oneCollectionView.endInteractiveMovement()
-            case.cancelled:
-                self.oneCollectionView.cancelInteractiveMovement()
-            default:
-                return
-//                self.collectionView.cancelInteractiveMovement()
-        }
-    }
+//    @objc func onLongClick(_ sender: UILongPressGestureRecognizer) {
+//        let gestureLocation = sender.location(in: oneCollectionView)
+//        switch sender.state {
+//            case .began:
+//                if let item = oneCollectionView.indexPathForItem(at: gestureLocation) {
+//                    self.oneCollectionView.beginInteractiveMovementForItem(at: item)
+//                } else {
+//                    return
+//                }
+//            case .changed:
+//                self.oneCollectionView.updateInteractiveMovementTargetPosition(gestureLocation)
+//            case .ended:
+//                self.oneCollectionView.endInteractiveMovement()
+//            case.cancelled:
+//                self.oneCollectionView.cancelInteractiveMovement()
+//            default:
+//                return
+////                self.collectionView.cancelInteractiveMovement()
+//        }
+//    }
     
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class OneCollectionView: UICollectionView {
 
+    private lazy var isActive: Bool = false
+
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -35,32 +37,32 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as! DirectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return DirectionViewCell()}
         cell.setupCell(directionIndex: indexPath.item)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as! DirectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return CGSize() }
         return cell.label.intrinsicContentSize
     }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: collectionView.frame.width,height: 100)
+//    }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width,height: 100)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = Content.shared.directions.remove(at: sourceIndexPath.item)
-        Content.shared.directions.insert(item, at: destinationIndexPath.item)
-    }
+//    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let item = Content.shared.directions.remove(at: sourceIndexPath.item)
+//        Content.shared.directions.insert(item, at: destinationIndexPath.item)
+//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell =
-        (
-            collectionView.cellForItem(at: indexPath) as! DirectionViewCell
-        )
-        cell.label.textColor = .white
-        cell.backgroundColor = UIColor(named: "ColorInsertCell")
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DirectionViewCell else { return }
+        if !cell.isActive {
+            cell.setupSelect(isActive: true)
+        } else {
+            cell.setupSelect(isActive: false)
+        }
     }
 
 }

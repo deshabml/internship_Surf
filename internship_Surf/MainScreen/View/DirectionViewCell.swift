@@ -11,9 +11,12 @@ class DirectionViewCell: UICollectionViewCell {
 
     static let id = "DirectionViewCell"
 
+    var isActive: Bool = false
+
     var label: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont(name: "medium", size: 14)
+        label.textColor = UIColor(named: "ColorButton")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -50,6 +53,23 @@ extension DirectionViewCell {
 
     func setupCell(directionIndex: Int) {
         label.text = Content.shared.directions[directionIndex]
+    }
+
+    func setupSelect(isActive: Bool) {
+        self.isActive = isActive
+        if isActive {
+            UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                self.backgroundColor = UIColor(named: "ColorInsertCell")
+            }) {_ in
+                self.label.textColor = .white
+            }
+        } else {
+            UIView.animate(withDuration: 0.5, delay: 0, animations: {
+                self.backgroundColor = UIColor(named: "ColorCell")
+            }) {_ in
+                self.label.textColor = UIColor(named: "ColorButton")
+            }
+        }
     }
 
 }
