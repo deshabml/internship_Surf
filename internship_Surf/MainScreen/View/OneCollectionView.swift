@@ -37,7 +37,7 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return DirectionViewCell()}
-        cell.setupCell(directionIndex: indexPath.row, isActive: indexPath.item == numberActive)
+        cell.setupCell(directionIndex: indexPath.item, isActive: indexPath.item == numberActive)
         return cell
     }
 
@@ -48,30 +48,19 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
                 return CGSize(width: label.frame.width + 48, height: 44)
     }
 
-//    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-//        if 
-//    }
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DirectionViewCell else { return }
         if !cell.isActive {
             numberActive = cell.indexCell
             cell.setupSelect(isActive: true) {
-                DispatchQueue.main.async {
-                    self.reloadData()
-                }
-//                self.reloadData()
+                self.reloadData()
             }
         } else {
             numberActive = -1
             cell.setupSelect(isActive: false) {
-                DispatchQueue.main.async {
-                    self.reloadData()
-                }
-//                self.reloadData()
+                self.reloadData()
             }
         }
     }
 
 }
-
