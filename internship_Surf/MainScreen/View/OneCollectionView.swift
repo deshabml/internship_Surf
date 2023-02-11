@@ -9,15 +9,14 @@ import UIKit
 
 class OneCollectionView: UICollectionView {
 
-    private lazy var isActive: Bool = false
+    private var numberActive: Int!
 
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        layout.sectionInset = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 0)
         layout.minimumInteritemSpacing = 12
         layout.minimumLineSpacing = 12
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         super.init(frame: .zero, collectionViewLayout: layout)
         register(DirectionViewCell.self, forCellWithReuseIdentifier: DirectionViewCell.id)
         dataSource = self
@@ -38,30 +37,39 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return DirectionViewCell()}
-        cell.setupCell(directionIndex: indexPath.item)
+        cell.setupCell(directionIndex: indexPath.row, isActive: indexPath.item == numberActive)
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return CGSize() }
-        return cell.label.intrinsicContentSize
+        let label = UILabel(frame: CGRect.zero)
+                label.text = Content.shared.directions[indexPath.item]
+                label.sizeToFit()
+                return CGSize(width: label.frame.width + 48, height: 44)
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: collectionView.frame.width,height: 100)
-//    }
 
-//    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        let item = Content.shared.directions.remove(at: sourceIndexPath.item)
-//        Content.shared.directions.insert(item, at: destinationIndexPath.item)
+//    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+//        if 
 //    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DirectionViewCell else { return }
         if !cell.isActive {
-            cell.setupSelect(isActive: true)
+            numberActive = cell.indexCell
+            cell.setupSelect(isActive: true) {
+                DispatchQueue.main.async {
+                    self.reloadData()
+                }
+//                self.reloadData()
+            }
         } else {
-            cell.setupSelect(isActive: false)
+            numberActive = -1
+            cell.setupSelect(isActive: false) {
+                DispatchQueue.main.async {
+                    self.reloadData()
+                }
+//                self.reloadData()
+            }
         }
     }
 
