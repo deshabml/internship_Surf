@@ -14,6 +14,8 @@
 		DDB5CDED2996801800EECDB0 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDEC2996801700EECDB0 /* MainScreenViewController.swift */; };
 		DDB5CDF02996808100EECDB0 /* UIView+AddSudviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDEF2996808100EECDB0 /* UIView+AddSudviews.swift */; };
 		DDB5CDF429968A3B00EECDB0 /* MainScreenContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */; };
+		DDB5CDF72996ADE800EECDB0 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDF62996ADE800EECDB0 /* Content.swift */; };
+		DDB5CDF92996CB1400EECDB0 /* DirectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		DDB5CDEC2996801700EECDB0 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		DDB5CDEF2996808100EECDB0 /* UIView+AddSudviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddSudviews.swift"; sourceTree = "<group>"; };
 		DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenContentView.swift; sourceTree = "<group>"; };
+		DDB5CDF62996ADE800EECDB0 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,7 @@
 		DDB5CDEB29967FB900EECDB0 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				DDB5CDF52996ADCE00EECDB0 /* Model */,
 				DDB5CDF2299689FE00EECDB0 /* View */,
 				DDB5CDF1299680AD00EECDB0 /* Controller */,
 			);
@@ -130,8 +135,17 @@
 			isa = PBXGroup;
 			children = (
 				DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */,
+				DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DDB5CDF52996ADCE00EECDB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDB5CDF62996ADE800EECDB0 /* Content.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,8 +221,10 @@
 				DDB5CDED2996801800EECDB0 /* MainScreenViewController.swift in Sources */,
 				DDB5CDD42996776F00EECDB0 /* AppDelegate.swift in Sources */,
 				DDB5CDF429968A3B00EECDB0 /* MainScreenContentView.swift in Sources */,
+				DDB5CDF92996CB1400EECDB0 /* DirectionViewCell.swift in Sources */,
 				DDB5CDF02996808100EECDB0 /* UIView+AddSudviews.swift in Sources */,
 				DDB5CDD62996776F00EECDB0 /* SceneDelegate.swift in Sources */,
+				DDB5CDF72996ADE800EECDB0 /* Content.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
