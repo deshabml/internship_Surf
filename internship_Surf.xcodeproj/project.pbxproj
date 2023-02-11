@@ -16,6 +16,7 @@
 		DDB5CDF429968A3B00EECDB0 /* MainScreenContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */; };
 		DDB5CDF72996ADE800EECDB0 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDF62996ADE800EECDB0 /* Content.swift */; };
 		DDB5CDF92996CB1400EECDB0 /* DirectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */; };
+		DDB5CDFB2997632400EECDB0 /* OneCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDFA2997632400EECDB0 /* OneCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenContentView.swift; sourceTree = "<group>"; };
 		DDB5CDF62996ADE800EECDB0 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 		DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionViewCell.swift; sourceTree = "<group>"; };
+		DDB5CDFA2997632400EECDB0 /* OneCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */,
+				DDB5CDFA2997632400EECDB0 /* OneCollectionView.swift */,
 				DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */,
 			);
 			path = View;
@@ -221,6 +224,7 @@
 				DDB5CDED2996801800EECDB0 /* MainScreenViewController.swift in Sources */,
 				DDB5CDD42996776F00EECDB0 /* AppDelegate.swift in Sources */,
 				DDB5CDF429968A3B00EECDB0 /* MainScreenContentView.swift in Sources */,
+				DDB5CDFB2997632400EECDB0 /* OneCollectionView.swift in Sources */,
 				DDB5CDF92996CB1400EECDB0 /* DirectionViewCell.swift in Sources */,
 				DDB5CDF02996808100EECDB0 /* UIView+AddSudviews.swift in Sources */,
 				DDB5CDD62996776F00EECDB0 /* SceneDelegate.swift in Sources */,

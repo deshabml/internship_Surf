@@ -26,20 +26,20 @@ class MainScreenContentView: UIView {
         return oneLabel
     }()
 
-    private lazy var collectionViewOne: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        layout.minimumInteritemSpacing = 12
-        layout.minimumLineSpacing = 12
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        let collectionViewOne = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionViewOne.register(DirectionViewCell.self, forCellWithReuseIdentifier: DirectionViewCell.id)
-        collectionViewOne.dataSource = self
-        collectionViewOne.delegate = self
-        collectionViewOne.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var oneCollectionView: UICollectionView = {
+        let collectionViewOne = OneCollectionView()
+        let longClick = UILongPressGestureRecognizer(target: self, action: #selector(onLongClick))
+        collectionViewOne.addGestureRecognizer(longClick)
         return collectionViewOne
+    }()
 
+    private lazy var twoLabel: UILabel = {
+        let oneLabel = UILabel()
+        oneLabel.text = Content.shared.content.textTwo
+        oneLabel.font = UIFont(name: "regular", size: 14)
+        oneLabel.textColor = UIColor(named: "ColorLabel")
+        oneLabel.numberOfLines = 0
+        return oneLabel
     }()
 
     override init(frame: CGRect) {
@@ -48,7 +48,8 @@ class MainScreenContentView: UIView {
         addSubviews([
             headLabel,
             oneLabel,
-            collectionViewOne
+            oneCollectionView,
+            twoLabel
               ])
               installingСonstraints()
     }
@@ -68,40 +69,35 @@ extension MainScreenContentView {
             oneLabel.topAnchor.constraint(equalTo: headLabel.bottomAnchor, constant: 12),
             oneLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             oneLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            collectionViewOne.topAnchor.constraint(equalTo: oneLabel.bottomAnchor),
-            collectionViewOne.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionViewOne.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionViewOne.heightAnchor.constraint(equalToConstant: 68)
+            oneCollectionView.topAnchor.constraint(equalTo: oneLabel.bottomAnchor),
+            oneCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            oneCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            oneCollectionView.heightAnchor.constraint(equalToConstant: 68),
+            twoLabel.topAnchor.constraint(equalTo: oneCollectionView.bottomAnchor, constant: 12),
+            twoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            twoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
 
-}
-
-extension MainScreenContentView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Content.shared.directions.count
+    @objc func onLongClick(_ sender: UILongPressGestureRecognizer) {
+        let gestureLocation = sender.location(in: oneCollectionView)
+        switch sender.state {
+            case .began:
+                if let item = oneCollectionView.indexPathForItem(at: gestureLocation) {
+                    self.oneCollectionView.beginInteractiveMovementForItem(at: item)
+                } else {
+                    return
+                }
+            case .changed:
+                self.oneCollectionView.updateInteractiveMovementTargetPosition(gestureLocation)
+            case .ended:
+                self.oneCollectionView.endInteractiveMovement()
+            case.cancelled:
+                self.oneCollectionView.cancelInteractiveMovement()
+            default:
+                return
+//                self.collectionView.cancelInteractiveMovement()
+        }
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as! DirectionViewCell
-        cell.setupCell(directionIndex: indexPath.item)
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as! DirectionViewCell
-        return cell.label.intrinsicContentSize
-
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell =
-        (
-            collectionView.cellForItem(at: indexPath) as! DirectionViewCell
-        )
-        cell.label.textColor = .white
-        cell.backgroundColor = UIColor(named: "ColorInsertCell")
-    }
-
+    
 }
