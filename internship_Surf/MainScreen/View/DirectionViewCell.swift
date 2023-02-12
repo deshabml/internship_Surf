@@ -15,8 +15,6 @@ class DirectionViewCell: UICollectionViewCell {
 
     var indexCell: Int!
 
-    private var reload: (() -> ())!
-
     var label: UILabel = {
         let label = UILabel(frame: .zero)
         label.font = UIFont(name: "medium", size: 14)
@@ -67,18 +65,15 @@ extension DirectionViewCell {
         }
     }
 
-    func setupSelect(isActive: Bool, reload: @escaping () -> ()) {
+    func setupSelect(isActive: Bool) {
         self.isActive = isActive
-        self.reload = reload
         if isActive {
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
                 self.backgroundColor = UIColor(named: "ColorInsertCell")
             }) {_ in
                 UIView.animate(withDuration: 0.5, delay: 0, animations: {
                     self.label.textColor = .white
-                }) {_ in
-                    self.reload()
-                }
+                })
             }
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, animations: {
@@ -86,9 +81,7 @@ extension DirectionViewCell {
             }) {_ in
                 UIView.animate(withDuration: 0.5, delay: 0, animations: {
                     self.label.textColor = UIColor(named: "ColorButton")
-                }) {_ in
-                    self.reload()
-                }
+                })
             }
         }
     }

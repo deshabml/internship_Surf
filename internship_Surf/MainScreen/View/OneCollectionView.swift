@@ -9,7 +9,7 @@ import UIKit
 
 class OneCollectionView: UICollectionView {
 
-    private var numberActive: Int!
+    private var numberActive: [Int] = []
 
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -37,7 +37,7 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return DirectionViewCell()}
-        cell.setupCell(directionIndex: indexPath.item, isActive: indexPath.item == numberActive)
+        cell.setupCell(directionIndex: indexPath.item, isActive: numberActive.contains(indexPath.item))
         return cell
     }
 
@@ -51,15 +51,11 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DirectionViewCell else { return }
         if !cell.isActive {
-            numberActive = cell.indexCell
-            cell.setupSelect(isActive: true) {
-                self.reloadData()
-            }
+            numberActive.append(cell.indexCell)
+            cell.setupSelect(isActive: true)
         } else {
-            numberActive = -1
-            cell.setupSelect(isActive: false) {
-                self.reloadData()
-            }
+            numberActive = numberActive.filter {$0 != indexPath.item}
+            cell.setupSelect(isActive: false)
         }
     }
 
