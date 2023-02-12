@@ -31,6 +31,11 @@ class MainScreenContentView: UIView {
         return collectionViewOne
     }()
 
+    private lazy var twoCollectionView: UICollectionView = {
+        let collectionViewOne = TwoCollectionView()
+        return collectionViewOne
+    }()
+
     private lazy var twoLabel: UILabel = {
         let oneLabel = UILabel()
         oneLabel.text = Content.shared.content.textTwo
@@ -47,7 +52,8 @@ class MainScreenContentView: UIView {
             headLabel,
             oneLabel,
             oneCollectionView,
-            twoLabel
+            twoLabel,
+            twoCollectionView
               ])
               installingСonstraints()
     }
@@ -73,7 +79,11 @@ extension MainScreenContentView {
             oneCollectionView.heightAnchor.constraint(equalToConstant: 68),
             twoLabel.topAnchor.constraint(equalTo: oneCollectionView.bottomAnchor, constant: 12),
             twoLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            twoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            twoLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            twoCollectionView.topAnchor.constraint(equalTo: twoLabel.bottomAnchor),
+            twoCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            twoCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            twoCollectionView.heightAnchor.constraint(equalToConstant: 136)
         ])
     }
 

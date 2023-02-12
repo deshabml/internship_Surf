@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD4967DD2998FD88005F4B29 /* TwoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4967DC2998FD88005F4B29 /* TwoCollectionView.swift */; };
 		DDB5CDD42996776F00EECDB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDD32996776F00EECDB0 /* AppDelegate.swift */; };
 		DDB5CDD62996776F00EECDB0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5CDD52996776F00EECDB0 /* SceneDelegate.swift */; };
 		DDB5CDDD2996777100EECDB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDB5CDDC2996777100EECDB0 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD4967DC2998FD88005F4B29 /* TwoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoCollectionView.swift; sourceTree = "<group>"; };
 		DDB5CDD02996776F00EECDB0 /* internship_Surf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = internship_Surf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDB5CDD32996776F00EECDB0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDB5CDD52996776F00EECDB0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				DDB5CDF329968A3B00EECDB0 /* MainScreenContentView.swift */,
 				DDB5CDFA2997632400EECDB0 /* OneCollectionView.swift */,
+				DD4967DC2998FD88005F4B29 /* TwoCollectionView.swift */,
 				DDB5CDF82996CB1400EECDB0 /* DirectionViewCell.swift */,
 			);
 			path = View;
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDB5CDED2996801800EECDB0 /* MainScreenViewController.swift in Sources */,
+				DD4967DD2998FD88005F4B29 /* TwoCollectionView.swift in Sources */,
 				DDB5CDD42996776F00EECDB0 /* AppDelegate.swift in Sources */,
 				DDB5CDF429968A3B00EECDB0 /* MainScreenContentView.swift in Sources */,
 				DDB5CDFB2997632400EECDB0 /* OneCollectionView.swift in Sources */,
