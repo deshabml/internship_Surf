@@ -53,8 +53,8 @@ extension DirectionViewCell {
         ])
     }
 
-    func setupCell(directionIndex: Int, isActive: Bool) {
-        label.text = Content.shared.directions[directionIndex]
+    func setupCell(textLabel: String, directionIndex: Int, isActive: Bool) {
+        label.text = textLabel
         indexCell = directionIndex
         if isActive {
             backgroundColor = UIColor(named: "ColorInsertCell")

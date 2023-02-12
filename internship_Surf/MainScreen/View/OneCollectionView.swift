@@ -9,6 +9,8 @@ import UIKit
 
 class OneCollectionView: UICollectionView {
 
+    private var directions: [String]!
+
     private var numberActive: [Int] = []
 
     init() {
@@ -32,18 +34,18 @@ class OneCollectionView: UICollectionView {
 extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Content.shared.directions.count
+        directions.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return DirectionViewCell()}
-        cell.setupCell(directionIndex: indexPath.item, isActive: numberActive.contains(indexPath.item))
+        cell.setupCell(textLabel: directions[indexPath.item], directionIndex: indexPath.item, isActive: numberActive.contains(indexPath.item))
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel(frame: CGRect.zero)
-                label.text = Content.shared.directions[indexPath.item]
+                label.text = directions[indexPath.item]
                 label.sizeToFit()
                 return CGSize(width: label.frame.width + 48, height: 44)
     }
@@ -60,3 +62,26 @@ extension OneCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
     }
 
 }
+
+extension OneCollectionView {
+
+    func setupCollectionView(directions: [String]) {
+        self.directions = directions
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            let pageFloat = (scrollView.contentOffset.x / scrollView.frame.size.width)
+            let pageInt = Int(round(pageFloat))
+
+            switch pageInt {
+            case 0:
+                self.scrollToItem(at: [0, 3], at: .left, animated: false)
+            case directions.count - 1:
+                self.scrollToItem(at: [0, 1], at: .left, animated: false)
+            default:
+                break
+            }
+        }
+    
+}
+

@@ -9,6 +9,8 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
 
+    var presenter: MainScreenViewPresenterProtocol!
+
     lazy var backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: UIImage(named: "bacgraundImage"))
         backgroundImageView.frame = view.frame
@@ -22,7 +24,7 @@ class MainScreenViewController: UIViewController {
         return scrollView
     }()
 
-    private lazy var screenContentView: UIView = {
+    private lazy var screenContentView: MainScreenContentView = {
         let contentView = MainScreenContentView()
         contentView.layer.cornerRadius = 32
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +65,7 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.showContent()
         view.addSubviews([
             backgroundImageView,
             scrollView,
@@ -101,7 +104,8 @@ extension MainScreenViewController {
 
     @objc func buttonActionSendRequest() {
         let alert = UIAlertController(title: "Поздравляем!", message: "Ваша заявка успешно отправлена!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel ))
+        alert.addAction(UIAlertAction(title: "Закрыть", style: .default ))
+        alert.view.tintColor = .black
         present(alert, animated: true, completion: nil)
     }
 
@@ -111,6 +115,14 @@ extension MainScreenViewController {
 
     @objc func buttonActionDoWantTwo() {
         doWantButton.alpha = 1
+    }
+
+}
+
+extension MainScreenViewController: MainScreenViewProtocol {
+
+    func setContent(contents: Contents, directions: [String]) {
+        screenContentView.setupView(contents: contents, directions: directions)
     }
 
 }

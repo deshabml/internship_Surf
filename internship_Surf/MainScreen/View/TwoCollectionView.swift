@@ -9,6 +9,8 @@ import UIKit
 
 class TwoCollectionView: UICollectionView {
 
+    private var directions: [String]!
+
     private var numberActive: [Int] = []
 
     init() {
@@ -32,18 +34,18 @@ class TwoCollectionView: UICollectionView {
 extension TwoCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Content.shared.directions.count
+        directions.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DirectionViewCell.id, for: indexPath) as? DirectionViewCell else { return DirectionViewCell()}
-        cell.setupCell(directionIndex: indexPath.item, isActive: numberActive.contains(indexPath.item))
+        cell.setupCell(textLabel: directions[indexPath.item], directionIndex: indexPath.item, isActive: numberActive.contains(indexPath.item))
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let label = UILabel(frame: CGRect.zero)
-                label.text = Content.shared.directions[indexPath.item]
+                label.text = directions[indexPath.item]
                 label.sizeToFit()
                 return CGSize(width: label.frame.width + 48, height: 44)
     }
@@ -59,5 +61,13 @@ extension TwoCollectionView: UICollectionViewDataSource, UICollectionViewDelegat
         }
     }
 
+}
+
+extension TwoCollectionView {
+
+    func setupCollectionView(directions: [String]) {
+        self.directions = directions
+    }
+    
 }
 
