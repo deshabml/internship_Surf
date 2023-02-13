@@ -68,20 +68,5 @@ extension OneCollectionView {
     func setupCollectionView(directions: [String]) {
         self.directions = directions
     }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            let pageFloat = (scrollView.contentOffset.x / scrollView.frame.size.width)
-            let pageInt = Int(round(pageFloat))
-
-            switch pageInt {
-            case 0:
-                self.scrollToItem(at: [0, 3], at: .left, animated: false)
-            case directions.count - 1:
-                self.scrollToItem(at: [0, 1], at: .left, animated: false)
-            default:
-                break
-            }
-        }
     
 }
-
